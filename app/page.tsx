@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/AppShell';
 import { SleepTracker } from '@/components/SleepTracker';
 import { JournalEntryForm } from '@/components/JournalEntryForm';
@@ -12,6 +13,8 @@ import { calculateSleepQuality } from '@/lib/utils';
 import { Card, CardContent, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Sparkles, TrendingUp } from 'lucide-react';
+import { useAppSettings } from '@/lib/hooks/useLocalStorage';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 export default function HomePage() {
   const [isTracking, setIsTracking] = useState(false);
@@ -19,6 +22,24 @@ export default function HomePage() {
   const [currentInsight, setCurrentInsight] = useState<string | null>(null);
   const [isGeneratingInsight, setIsGeneratingInsight] = useState(false);
   const [showJournalForm, setShowJournalForm] = useState<'pre' | 'post' | null>(null);
+  const [appSettings] = useAppSettings();
+  const router = useRouter();
+
+  // Check if onboarding is completed
+  useEffect(() => {
+    if (!appSettings.onboardingCompleted) {
+      router.push('/onboarding');
+    }
+  }, [appSettings.onboardingCompleted, router]);
+
+  // Show loading while checking onboarding status
+  if (!appSettings.onboardingCompleted) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <LoadingSpinner size="lg" text="Setting up your experience..." />
+      </div>
+    );
+  }
 
   // Mock data for demonstration
   const mockStats = {
@@ -171,8 +192,8 @@ export default function HomePage() {
             >
               ☀️ Log Morning Feelings
             </Button>
-            <Button variant="outline" className="w-full justify-start">
-              🧘 Start Meditation
+            <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/mindfulness'}>
+              🧘 Mindfulness Tools
             </Button>
           </CardContent>
         </Card>

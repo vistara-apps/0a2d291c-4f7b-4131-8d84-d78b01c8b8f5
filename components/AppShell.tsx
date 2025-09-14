@@ -1,11 +1,12 @@
 'use client';
 
-import { Home, Search, User, Moon } from 'lucide-react';
+import { Home, Search, User, Moon, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 interface AppShellProps {
   children: React.ReactNode;
-  activeTab?: 'home' | 'search' | 'profile';
+  activeTab?: 'home' | 'insights' | 'mindfulness' | 'profile';
 }
 
 export function AppShell({ children, activeTab = 'home' }: AppShellProps) {
@@ -34,41 +35,61 @@ export function AppShell({ children, activeTab = 'home' }: AppShellProps) {
         <nav className="fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-lg border-t border-surface">
           <div className="max-w-3xl mx-auto px-4">
             <div className="flex items-center justify-around py-2">
-              <button
-                className={cn(
-                  'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
-                  activeTab === 'home' 
-                    ? 'text-accent bg-accent/10' 
-                    : 'text-text-secondary hover:text-text-primary'
-                )}
-              >
-                <Home className="h-5 w-5" />
-                <span className="text-xs">Home</span>
-              </button>
-              
-              <button
-                className={cn(
-                  'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
-                  activeTab === 'search' 
-                    ? 'text-accent bg-accent/10' 
-                    : 'text-text-secondary hover:text-text-primary'
-                )}
-              >
-                <Search className="h-5 w-5" />
-                <span className="text-xs">Insights</span>
-              </button>
-              
-              <button
-                className={cn(
-                  'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
-                  activeTab === 'profile' 
-                    ? 'text-accent bg-accent/10' 
-                    : 'text-text-secondary hover:text-text-primary'
-                )}
-              >
-                <User className="h-5 w-5" />
-                <span className="text-xs">Profile</span>
-              </button>
+              <Link href="/">
+                <button
+                  className={cn(
+                    'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
+                    activeTab === 'home'
+                      ? 'text-accent bg-accent/10'
+                      : 'text-text-secondary hover:text-text-primary'
+                  )}
+                >
+                  <Home className="h-5 w-5" />
+                  <span className="text-xs">Home</span>
+                </button>
+              </Link>
+
+              <Link href="/insights">
+                <button
+                  className={cn(
+                    'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
+                    activeTab === 'insights'
+                      ? 'text-accent bg-accent/10'
+                      : 'text-text-secondary hover:text-text-primary'
+                  )}
+                >
+                  <Search className="h-5 w-5" />
+                  <span className="text-xs">Insights</span>
+                </button>
+              </Link>
+
+              <Link href="/mindfulness">
+                <button
+                  className={cn(
+                    'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
+                    activeTab === 'mindfulness'
+                      ? 'text-accent bg-accent/10'
+                      : 'text-text-secondary hover:text-text-primary'
+                  )}
+                >
+                  <Brain className="h-5 w-5" />
+                  <span className="text-xs">Mindful</span>
+                </button>
+              </Link>
+
+              <Link href="/profile">
+                <button
+                  className={cn(
+                    'flex flex-col items-center space-y-1 p-2 rounded-lg transition-colors duration-200',
+                    activeTab === 'profile'
+                      ? 'text-accent bg-accent/10'
+                      : 'text-text-secondary hover:text-text-primary'
+                  )}
+                >
+                  <User className="h-5 w-5" />
+                  <span className="text-xs">Profile</span>
+                </button>
+              </Link>
             </div>
           </div>
         </nav>

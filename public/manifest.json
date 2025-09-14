@@ -1,0 +1,14 @@
+{
+  "name": "DreamWeaver AI",
+  "description": "DreamWeaver AI is a Base Mini App built with Zara.",
+  "image": "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=OG",
+  "external_url": "https://0a2d291c-4f7b-4131-8d84-d78b01c8b8f5.vercel.app",
+  "properties": {
+    "app": {
+      "name": "DreamWeaver AI",
+      "description": "DreamWeaver AI is a Base Mini App built with Zara.",
+      "url": "https://0a2d291c-4f7b-4131-8d84-d78b01c8b8f5.vercel.app",
+      "icon": "https://0co.to/images/zara-2.png"
+    }
+  }
+}

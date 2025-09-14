@@ -1,16 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AppShell } from '@/components/AppShell';
-import { SleepTracker } from '@/components/SleepTracker';
-import { JournalEntryForm } from '@/components/JournalEntryForm';
-import { CoachingInsightCard } from '@/components/CoachingInsightCard';
-import { SleepStats } from '@/components/SleepStats';
-import { SleepChart } from '@/components/SleepChart';
-import { generateSleepInsight } from '@/lib/ai-service';
-import { calculateSleepQuality } from '@/lib/utils';
-import { Card, CardContent, CardTitle } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { AppShell } from '../components/AppShell';
+import { SleepTracker } from '../components/SleepTracker';
+import { JournalEntryForm } from '../components/JournalEntryForm';
+import { CoachingInsightCard } from '../components/CoachingInsightCard';
+import { SleepStats } from '../components/SleepStats';
+import { SleepChart } from '../components/SleepChart';
+import { generateSleepInsight } from '../lib/ai-service';
+import { calculateSleepQuality } from '../lib/utils';
 import { Sparkles, TrendingUp } from 'lucide-react';
 
 export default function HomePage() {
@@ -81,11 +79,11 @@ export default function HomePage() {
     <AppShell activeTab="home">
       <div className="space-y-6">
         {/* Welcome Section */}
-        <div className="text-center py-6">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+        <div style={{textAlign: 'center', padding: '24px 0'}}>
+          <h2 style={{fontSize: '24px', fontWeight: 'bold', marginBottom: '8px'}}>
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'}! 🌙
           </h2>
-          <p className="text-text-secondary">
+          <p style={{color: '#cccccc'}}>
             Ready to track your sleep and unlock better rest?
           </p>
         </div>
@@ -107,14 +105,14 @@ export default function HomePage() {
 
         {/* AI Insight */}
         {isGeneratingInsight && (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center space-x-3">
-                <Sparkles className="h-5 w-5 text-accent animate-spin" />
-                <p className="text-text-secondary">Generating personalized insights...</p>
+          <div style={{background: '#1a1a2e', border: '1px solid #374151', borderRadius: '8px', padding: '16px'}}>
+            <div style={{paddingTop: '16px'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+                <Sparkles style={{width: '20px', height: '20px', color: '#fbbf24'}} />
+                <p style={{color: '#cccccc'}}>Generating personalized insights...</p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {currentInsight && (
@@ -131,51 +129,49 @@ export default function HomePage() {
 
         {/* Sleep Stats */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-text-primary">Sleep Overview</h3>
-            <Button variant="ghost" size="sm">
-              <TrendingUp className="h-4 w-4 mr-2" />
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px'}}>
+            <h3 style={{fontSize: '18px', fontWeight: '600'}}>Sleep Overview</h3>
+            <button style={{background: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer', fontSize: '14px'}}>
+              <TrendingUp style={{width: '16px', height: '16px', marginRight: '8px'}} />
               View All
-            </Button>
+            </button>
           </div>
           <SleepStats stats={mockStats} />
         </div>
 
         {/* Sleep Chart */}
-        <Card>
-          <CardTitle className="text-lg font-semibold text-text-primary mb-4">
+        <div style={{background: '#1a1a2e', border: '1px solid #374151', borderRadius: '8px', padding: '16px'}}>
+          <h3 style={{fontSize: '18px', fontWeight: '600', marginBottom: '16px'}}>
             Quality Trend (7 days)
-          </CardTitle>
-          <CardContent>
+          </h3>
+          <div>
             <SleepChart data={mockChartData} />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Quick Actions */}
-        <Card>
-          <CardTitle className="text-lg font-semibold text-text-primary mb-4">
+        <div style={{background: '#1a1a2e', border: '1px solid #374151', borderRadius: '8px', padding: '16px'}}>
+          <h3 style={{fontSize: '18px', fontWeight: '600', marginBottom: '16px'}}>
             Quick Actions
-          </CardTitle>
-          <CardContent className="space-y-3">
-            <Button 
-              variant="outline" 
-              className="w-full justify-start"
+          </h3>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+            <button
+              style={{width: '100%', padding: '8px 16px', border: '1px solid #374151', background: 'transparent', color: '#ffffff', borderRadius: '6px', cursor: 'pointer', textAlign: 'left'}}
               onClick={() => setShowJournalForm('pre')}
             >
               📝 Add Pre-sleep Notes
-            </Button>
-            <Button 
-              variant="outline" 
-              className="w-full justify-start"
+            </button>
+            <button
+              style={{width: '100%', padding: '8px 16px', border: '1px solid #374151', background: 'transparent', color: '#ffffff', borderRadius: '6px', cursor: 'pointer', textAlign: 'left'}}
               onClick={() => setShowJournalForm('post')}
             >
               ☀️ Log Morning Feelings
-            </Button>
-            <Button variant="outline" className="w-full justify-start">
+            </button>
+            <button style={{width: '100%', padding: '8px 16px', border: '1px solid #374151', background: 'transparent', color: '#ffffff', borderRadius: '6px', cursor: 'pointer', textAlign: 'left'}}>
               🧘 Start Meditation
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
     </AppShell>
   );

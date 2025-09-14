@@ -19,7 +19,7 @@ export function SleepTracker({ onStartSleep, onEndSleep, isTracking }: SleepTrac
       <div className="absolute inset-0 sleep-gradient opacity-20" />
       
       <div className="relative z-10 text-center py-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-6">
+        <h2 className="text-xl font-semibold text-foreground mb-6">
           {isTracking ? 'Sleep session active' : 'Start sleep session'}
         </h2>
         
@@ -52,7 +52,7 @@ export function SleepTracker({ onStartSleep, onEndSleep, isTracking }: SleepTrac
 
         {isTracking && (
           <div className="text-center">
-            <p className="text-text-secondary text-sm mb-2">Sleep session started</p>
+            <p className="text-muted-foreground text-sm mb-2">Sleep session started</p>
             <p className="text-accent font-medium">Sweet dreams! 🌙</p>
           </div>
         )}
